@@ -1,0 +1,54 @@
+# Ignore Python bytecode files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore virtual environment directory
+venv/
+.env/
+virtualenv/
+
+# Ignore data directories (if not necessary to include in the repo)
+dataset/
+data/
+*.csv
+*.h5
+
+# Ignore TensorFlow/Keras model checkpoints
+*.h5
+*.keras
+*.ckpt
+
+# Ignore logs
+*.log
+
+# Ignore system-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore configuration files
+*.cfg
+*.ini
+
+# Ignore IDE/editor-specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore environment files
+.env
+*.env
+
+# Ignore other large files
+*.zip
+*.tar.gz
+*.rar
+
+# Ignore Docker files (if using Docker)
+Dockerfile
+docker-compose.yml
