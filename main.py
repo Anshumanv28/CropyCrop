@@ -1,3 +1,6 @@
+# please run this script in your local machine before running this file
+# pip install requirements.txt
+
 import tensorflow as tf
 from tensorflow.keras.models import Sequential # type: ignore
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
