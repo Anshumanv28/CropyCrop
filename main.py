@@ -1,8 +1,8 @@
 import tensorflow as tf
 from tensorflow.keras.models import Sequential # type: ignore
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout # type: ignore
+from tensorflow.keras.preprocessing.image import ImageDataGenerator # type: ignore
+from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint # type: ignore
 
 # Directory paths
 train_dir = r'C:\Users\Lenovo\Downloads\projects\New Plant Diseases Dataset(Augmented)\New Plant Diseases Dataset(Augmented)\train'
@@ -71,8 +71,8 @@ callbacks = [
 # Training the Model
 history = model.fit(
     train_generator,
-    steps_per_epoch=train_generator.samples // batch_size,
-    validation_steps=val_generator.samples // batch_size,
+    steps_per_epoch=train_generator.samples, # batch_size,
+    validation_steps=validation_generator.samples, # batch_size,
     # steps_per_epoch=train_generator.samples // train_generator.batch_size,
     validation_data=validation_generator,
     # validation_steps=validation_generator.samples // validation_generator.batch_size,

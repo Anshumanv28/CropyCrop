@@ -11,6 +11,7 @@ __pycache__/
 venv/
 .env/
 virtualenv/
+myenv/
 
 # Ignore data directories (if not necessary to include in the repo)
 dataset/
@@ -52,3 +53,6 @@ Thumbs.db
 # Ignore Docker files (if using Docker)
 Dockerfile
 docker-compose.yml
+
+# Ignore specific folder
+.New_Plant_Disease_Dataset(Augmented)/

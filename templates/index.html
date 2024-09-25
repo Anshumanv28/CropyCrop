@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EzAgriculture</title>
+    <!-- Link the CSS file from the static folder using url_for -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/1.css') }}">
+</head>
+<body>
+    <header>
+        <h1>EzAgriculture</h1>
+        <button class="geoBtn">Show User Location and Weather Data</button>
+    </header>
+    
+    <div id="details" class="details">
+        <p id="showDetails" class="showDetails"></p>
+        <p id="fullAddress" class="fullAddress"></p>
+        <p id="formattedAddress" class="formattedAddress"></p>
+        <p id="weatherInfo" class="weatherInfo"></p>
+        <div id="cropRecommendation" class="recommendations"></div>
+        
+        <!-- Crop Recommendation Toggle Buttons -->
+        <div class="crop-toggle-buttons">
+            <button id="showRecommended" class="toggleBtn">Show Recommended Crops</button>
+            <button id="showNotRecommended" class="toggleBtn">Show Not Recommended Crops</button>
+        </div>
+        
+        <!-- Container for crop lists -->
+        <div id="cropLists">
+            <!-- Recommended and Not Recommended crops will be inserted here -->
+        </div>
+        
+        <!-- Advice statement -->
+        <p id="advice" class="advice" style="margin-top: 20px; font-size: 18px; color: #333;"></p>
+    </div>
+    
+    <div id="additionalButtons" class="buttons-container">
+        <button id="diseaseDetectionBtn" class="actionBtn">Crop Disease Detection</button>
+        <button id="soilMoistureBtn" class="actionBtn">Soil Moisture Detection</button>
+        <button id="cropYieldBtn" class="actionBtn">Crop Yield Detection</button>
+    </div>
+    
+    <div id="cropYieldForm" class="form-container" style="display:none;">
+        <h2>Crop Yield Prediction</h2>
+        <form id="yieldForm">
+            <label for="cropType">Crop Type:</label>
+            <select id="cropType">
+                <option value="corn">Corn</option>
+                <option value="wheat">Wheat</option>
+                <option value="rice">Rice</option>
+            </select><br><br>
+            <label for="soilQuality">Soil Quality:</label>
+            <input type="text" id="soilQuality" placeholder="e.g., Loamy, Sandy"><br><br>
+            <label for="fertilizerUsed">Fertilizer Used (kg/ha):</label>
+            <input type="number" id="fertilizerUsed"><br><br>
+            <label for="waterSupply">Water Supply (mm/month):</label>
+            <input type="number" id="waterSupply"><br><br>
+            <button type="button" onclick="calculateYield()">Predict Yield</button>
+        </form>
+        <div id="yieldResult"></div>
+    </div>
+
+    <div id="soilMoistureDetection" class="form-container">
+        <h2>Soil Moisture Detection</h2>
+        <input type="file" id="soilImageInput" accept="image/*">
+        <button id="analyzeSoilBtn" class="actionBtn"> Analyze Soil Moisture </button>
+        <div id="soilMoistureResult"></div>
+    </div>
+
+    <div id="diseaseDetection" class="form-container">
+        <h2>Crop Disease Detection</h2>
+        <input type="file" id="cropDiseaseImage" accept="image/*" style="display:none;">
+        <button id="uploadImageBtn" class="actionBtn">Upload Crop Image for Disease Detection</button>
+        <div id="diseaseDetectionResult"></div>
+    </div>
+
+    <!-- Link the JS file from the static folder using url_for -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
