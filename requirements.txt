@@ -1,0 +1,5 @@
+tensorflow==2.13.0
+numpy==1.24.3
+Pillow==10.0.1
+h5py==3.9.0
+scipy==1.11.1
