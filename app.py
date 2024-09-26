@@ -5,6 +5,7 @@ from flask_cors import CORS
 import tensorflow as tf
 from tensorflow.keras.preprocessing import image
 import numpy as np
+import json
 
 app = Flask(__name__)
 CORS(app)
@@ -18,6 +19,13 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 # Load the trained model once when the app starts
 model = tf.keras.models.load_model('crop_disease_final_model.keras')
+
+# Load the class indices (mapping of class names to indices)
+with open('class_indices.json', 'r') as f:
+    class_indices = json.load(f)
+
+# Invert the dictionary to map indices to class names
+class_labels = {v: k for k, v in class_indices.items()}
 
 # Function to check if the uploaded file has a valid extension
 def allowed_file(filename):
@@ -44,27 +52,10 @@ def predict_disease_from_image(image_path):
     predictions = model.predict(img_array)
     predicted_class = np.argmax(predictions, axis=1)  # Get the index of the class with the highest probability
 
-    # Map the predicted class index to the corresponding disease label
-    class_indices = {
-        0: "Apple Scab",
-        1: "Apple Black Rot",
-        2: "Cedar Apple Rust",
-        3: "Blight",  # Replace or extend with the actual classes in your dataset
-        # Add more classes if necessary...
-    }
-
     # Get the corresponding disease label
-    disease_label = class_indices.get(predicted_class[0], "Blight")
+    disease_label = class_labels.get(predicted_class[0], "Unknown disease")
     
     return disease_label
-
-# # Function to predict the disease (this should be replaced with actual model logic)
-# def predict_disease_from_image(image_path):
-#     # **TODO: Add your machine learning model prediction logic here**
-#     # For now, we return a dummy prediction
-#     # Example: Use TensorFlow or PyTorch to load the model and predict the result
-#     prediction = "Blight"  # Replace this with actual prediction logic
-#     return prediction
 
 # Serve the index.html as the homepage
 @app.route('/')

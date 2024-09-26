@@ -64,18 +64,45 @@
     <div id="soilMoistureDetection" class="form-container">
         <h2>Soil Moisture Detection</h2>
         <input type="file" id="soilImageInput" accept="image/*">
-        <button id="analyzeSoilBtn" class="actionBtn"> Analyze Soil Moisture </button>
+        <button id="analyzeSoilBtn" class="actionBtn">Analyze Soil Moisture</button>
         <div id="soilMoistureResult"></div>
     </div>
 
     <div id="diseaseDetection" class="form-container">
         <h2>Crop Disease Detection</h2>
-        <input type="file" id="cropDiseaseImage" accept="image/*" style="display:none;">
+        <input type="file" id="cropDiseaseImage" accept="image/*">
         <button id="uploadImageBtn" class="actionBtn">Upload Crop Image for Disease Detection</button>
         <div id="diseaseDetectionResult"></div>
     </div>
 
     <!-- Link the JS file from the static folder using url_for -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <script>
+        // Event listener for disease detection button
+        document.getElementById('uploadImageBtn').onclick = async function() {
+            const fileInput = document.getElementById('cropDiseaseImage');
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+
+            // Display the prediction result
+            const diseaseDetectionResult = document.getElementById('diseaseDetectionResult');
+            diseaseDetectionResult.innerHTML = `<p>Prediction: ${result.prediction}</p>`;
+
+            // Show the uploaded image
+            const imgElement = document.createElement('img');
+            imgElement.src = URL.createObjectURL(fileInput.files[0]);
+            imgElement.alt = 'Uploaded Crop Image';
+            imgElement.style.maxWidth = '100%'; // Responsive image
+            imgElement.style.marginTop = '10px';
+            diseaseDetectionResult.appendChild(imgElement);
+        };
+    </script>
 </body>
 </html>
